@@ -22,22 +22,26 @@ $(function() {
     drawClock(alarmClock.getCurrentTime(), "time")
     if(alarmClock.checkAlarm()){
       $("#alarmField").show();
+      $("#alarmField .jumbotron").toggleClass( "alarmClass" );
     }
-  }, 1000);
+  }, 500);
 
   $("#alarmSet").click(function() {
     alarmClock.setAlarm(newAlarm);
     $("#alarmSection").slideUp();
+    $("#nextAlarm span").text(alarmClock.getNextTime());
+    $("#nextAlarm").slideDown();
   });
 
   $("#snooze").click(function(){
     $("#alarmField").hide();
     var snooze = moment().add(10, 'm');
     alarmClock.setAlarm(snooze.format("hh:mm:ss a"));
+    $("#nextAlarm span").text(alarmClock.getNextTime());
   });
 
   $("#newAlarmBtn").click(function() {
-    newAlarm = alarmClock.getCurrentTime();
+    newAlarm = alarmClock.getNextTime();
     drawClock(newAlarm, "setAlarm");
     $("#alarmSection").slideDown();
   });
