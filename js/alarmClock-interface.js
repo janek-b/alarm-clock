@@ -24,7 +24,7 @@ $(function() {
       $("#alarmField").show();
       $("#alarmField .jumbotron").toggleClass( "alarmClass" );
     }
-  }, 500);
+  }, 100);
 
   $("#alarmSet").click(function() {
     alarmClock.setAlarm(newAlarm);
