@@ -6,14 +6,19 @@ var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var del = require('del');
 var jshint = require('gulp-jshint');
-var browserDync = require('browser-sync').create();
+var browserSync = require('browser-sync').create();
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap":{
       "main":[
         "less/bootstrap.less",
         "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
+        "dist/js/bootstrap.js",
+        "dist/fonts/glyphicons-halflings-regular.eot",
+        "dist/fonts/glyphicons-halflings-regular.svg",
+        "dist/fonts/glyphicons-halflings-regular.ttf",
+        "dist/fonts/glyphicons-halflings-regular.woff",
+        "dist/fonts/glyphicons-halflings-regular.woff2"
       ]
     }
   }
@@ -73,7 +78,12 @@ gulp.task('bowerCSS', function() {
     .pipe(gulp.dest('./build/css'));
 });
 
-gulp.task('bower', ['bowerJS', 'bowerCSS']);
+gulp.task('bowerFonts', function() {
+  return gulp.src(lib.ext(['eot', 'woff', 'woff2', 'ttf', 'svg']).files)
+    .pipe(gulp.dest('./build/fonts'));
+});
+
+gulp.task('bower', ['bowerJS', 'bowerCSS', 'bowerFonts']);
 
 gulp.task('serve', function() {
   browserSync.init({
