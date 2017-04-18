@@ -10,6 +10,10 @@ Clock.prototype.setAlarm = function(alarm) {
   this.alarm = moment(alarm, "hh:mm:ss a");
 };
 
+Clock.prototype.clearAlarm = function() {
+  this.alarm = null;
+};
+
 Clock.prototype.checkAlarm = function () {
   if (this.alarm) {
     return moment().isSameOrAfter(this.alarm, "second");

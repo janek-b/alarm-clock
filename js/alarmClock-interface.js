@@ -40,6 +40,12 @@ $(function() {
     $("#nextAlarm span").text(alarmClock.getNextTime());
   });
 
+  $("#dismiss").click(function() {
+    $("#alarmField").hide();
+    alarmClock.clearAlarm();
+    $("#nextAlarm").slideUp();
+  })
+
   $("#newAlarmBtn").click(function() {
     newAlarm = alarmClock.getNextTime();
     drawClock(newAlarm, "setAlarm");
